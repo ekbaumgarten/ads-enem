@@ -41,6 +41,12 @@
 					<div class="panel-body">
 						<table class="table">
 							<tr>
+								<th>Média</th>
+							</tr>
+							<tr>
+								<td>{{ads.metrics.original.total.avg}}</td>
+							</tr>
+							<tr>
 								<th>Mínimo</th>
 							</tr>
 							<tr>
@@ -51,12 +57,6 @@
 							</tr>
 							<tr>
 								<td>{{ads.metrics.original.total.max}}</td>
-							</tr>
-							<tr>
-								<th>Média</th>
-							</tr>
-							<tr>
-								<td>{{ads.metrics.original.total.avg}}</td>
 							</tr>
 							<tr>
 								<th>Variância</th>
@@ -83,6 +83,12 @@
 					<div class="panel-body">
 						<table class="table">
 							<tr>
+								<th>Média</th>
+							</tr>
+							<tr>
+								<td>{{ads.metrics.modified.total.avg}}</td>
+							</tr>
+							<tr>
 								<th>Mínimo</th>
 							</tr>
 							<tr>
@@ -93,12 +99,6 @@
 							</tr>
 							<tr>
 								<td>{{ads.metrics.modified.total.max}}</td>
-							</tr>
-							<tr>
-								<th>Média</th>
-							</tr>
-							<tr>
-								<td>{{ads.metrics.modified.total.avg}}</td>
 							</tr>
 							<tr>
 								<th>Variância</th>
@@ -116,20 +116,6 @@
 						</table>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-12">
-				<svg ng-repeat="demand in ads.demands | filter:{created:true,complete:false}" class="order {{demand.executing ? 'executing' : ''}} {{demand.complete ? 'complete' : ''}}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-					<g>
-						<g>
-							<path d="M335.375,196.469C331.219,94.875,304.188,0,256,0c-48.188,0-75.219,94.875-79.375,196.469
-								C166.875,201.938,160,212,160,224c0,17.688,14.313,32,32,32s32-14.313,32-32c0-11.344-6.25-20.844-15.125-26.531
-								C213.063,94.469,240.406,32,256,32s42.938,62.5,47.156,165.5C294.25,203.156,288,212.656,288,224c0,17.688,14.312,32,32,32
-								s32-14.313,32-32C352,212,345.125,201.938,335.375,196.469z"/>
-							<polygon points="416,128 352,128 352,160 388.906,160 442.219,480 69.781,480 123.125,160 160,160 160,128 96,128 32,512 480,512"/>
-						</g>
-					</g>
-					<text x="255" y="330" text-anchor="middle" alignment-baseline="central" font-size="80" fill="red">{{demand.code}}</text>
-				</svg>
 			</div>
 		</section>
 	</div>

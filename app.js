@@ -76,18 +76,35 @@ angular.module('adsApp', [])
 			return metrics;
 		}
 
+		ads.convertSchoolsType = function (json, convertAmount, targetType) {
+			var keys_to_convert = [];
+			for (var i = 0; i < json.length; i++) {
+				if (json[i].tipo != targetType) {
+					keys_to_convert.push(i);
+				}
+			}
+			keys_to_convert.sort(function() {return 0.5 - Math.random();});
+			for (var i = 0; i < convertAmount; i++) {
+				var sourceType = json[keys_to_convert[i]].tipo;
+				var correction_factor = ads.metrics.original[targetType].avg / ads.metrics.original[sourceType].avg;
+				var new_avg = json[keys_to_convert[i]].media * correction_factor;
+				var min = new_avg - ads.metrics.original[targetType].std_dev;
+				var max = new_avg + ads.metrics.original[targetType].std_dev;
+				json[keys_to_convert[i]].media = ((Math.random() * (max - min)) + min);
+				json[keys_to_convert[i]].tipo = targetType;
+			}
+
+			return json;
+		}
+
 		ads.modifyJSON = function (percentual_particular) {
 			var new_total_particular = Math.round(ads.jsons.original.length * (percentual_particular/100));
 			var diff = new_total_particular - ads.jsons.particular.length;
-			console.log(ads.jsons.particular.length, new_total_particular, diff);
-			if (diff > 0) {
-				//converter para particular
-			} else {
-				//converter para estadual
-			}
+			ads.jsons.modified = ads.convertSchoolsType(ads.jsons.modified, Math.abs(diff), (diff >= 0 ? "particular" : "estadual"));			
 		}
 
 		ads.run = function () {
+			ads.jsons.modified = JSON.parse(JSON.stringify(ads.jsons.original));
 			ads.modifyJSON(ads.percentual.particular);
 
 			ads.metrics.modified.total = ads.calcMetrics(ads.jsons.modified);
